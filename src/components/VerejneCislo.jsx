@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
+import axios from 'axios';
+
 
 const VerejneCislo = () => {
 
 	const [cislo, setCislo] = useState();
 
 	const nacistData = async () => {
-		const response = await fetch("https://random.zkusmo.eu/reliable");
-		const data = await response.json();
-		setCislo(data.randomNumber);
+
+		try {
+			const response = await axios.get("https://random.zkusmo.eu/shaky");
+			setCislo(response.data.randomNumber);
+		} catch (error) {
+			console.log(error)
+		}
+
 	}
 
 	return (
